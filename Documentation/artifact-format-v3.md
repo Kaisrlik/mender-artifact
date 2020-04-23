@@ -92,8 +92,8 @@ Contains the below content exactly:
 
 ```
 {
-  "format": "mender",
-  "version": 3
+    "format": "mender",
+    "version": 3
 }
 ```
 
@@ -254,13 +254,13 @@ It can also contain some additional parameters extending or modifying the global
 
 ```
 {
-  "type": "rootfs-image"
-  "artifact_provides": {
-      "rootfs_image_checksum": "4d480539cdb23a4aee6330ff80673a5af92b7793eb1c57c4694532f96383b619"
-  },
-  "artifact_depends": {
-      "rootfs_image_checksum": "4d480539cdb23a4aee6330ff80673a5af92b7793eb1c57c4694532f96383b619"
-  },
+    "type": "rootfs-image"
+    "artifact_provides": {
+        "rootfs_image_checksum": "4d480539cdb23a4aee6330ff80673a5af92b7793eb1c57c4694532f96383b619"
+    },
+    "artifact_depends": {
+        "rootfs_image_checksum": "4d480539cdb23a4aee6330ff80673a5af92b7793eb1c57c4694532f96383b619"
+    },
 }
 ```
 
