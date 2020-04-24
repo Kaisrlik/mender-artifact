@@ -83,7 +83,7 @@ in the "Ordering" section.
 ```
 
 
-version
+`version`
 ----
 
 Format: JSON
@@ -101,7 +101,7 @@ The `format` value is to confirm that this is indeed a Mender Artifact file, and
 the `version` value is a way to extend/change the format later if needed.
 
 
-manifest
+`manifest`
 ----
 
 Format: text
@@ -120,7 +120,7 @@ data files being a part of the Artifact. The format matches the output of
 the two spaces.
 
 
-manifest.sig
+`manifest.sig`
 ----
 
 Format: base64 encoded ecdsa or rsa signature
@@ -130,7 +130,7 @@ File containing the signature of `manifest`.
 An Artifact is not required to contain a signature file.
 
 
-manifest-augment
+`manifest-augment`
 ----
 
 Format: text
@@ -151,8 +151,8 @@ payload of the file being a part of the Artifact) and the header-augment.tar.gz
 file checksum.
 
 
-header.tar.gz
--------------
+`header.tar.gz`
+---------------
 
 Format: tar
 
@@ -160,7 +160,7 @@ A tar file that contains various header files.
 
 Why is there a tar file inside a tar file? See the "Ordering" section.
 
-### header-info
+### `header-info`
 
 Format: JSON
 
@@ -208,7 +208,7 @@ corresponding to each element `payloads` inside `header-info`, in order. The
 following sub sections define each field under each such bucket.
 
 
-#### artifact_depends
+#### `artifact_depends`
 
 The `artifact_depends` contains a set of parameters that the current Artifact
 depends on. It can contain zero or more key/value pairs (in most cases at least
@@ -223,7 +223,7 @@ of matching parameters. The complete list contains following parameters:
 * `artifact_group` is the group the current Artifact belongs to
 
 
-#### artifact_provides
+#### `artifact_provides`
 
 The `artifact_provides` is a set of global parameters given Artifact provides.
 For the detailed information see the description of the given parameter below.
@@ -232,7 +232,7 @@ For the detailed information see the description of the given parameter below.
 * `artifact_group` is the name of the group of Artifacts given Artifact
 belongs to
 
-#### device_provides
+#### `device_provides`
 
 There is also a set of parameters that are provided by the device itself,
 which are not a part of the Artifact. Those are the values, that the device
@@ -242,7 +242,7 @@ itself can read and send to the Mender server when needed. The full list of
 * `device_type` is the current device type
 
 
-### type-info
+### `type-info`
 
 Format: JSON
 
@@ -264,7 +264,7 @@ It can also contain some additional parameters extending or modifying the global
 }
 ```
 
-#### artifact_provides
+#### `artifact_provides`
 
 As an opposite to the list of global `artifact_provides` being a part of
 `header-info` file, the `artifact_provides` section in the `type-info` file
@@ -273,7 +273,7 @@ is a set of parameters specific for a given payload type.
 The `artifact_provides` is a key-value store, where the value is either a string,
 or an array of strings.
 
-#### artifact_depends
+#### `artifact_depends`
 
 The `artifact_depends` section in the `type-info` file is a set of parameters
 specific for a given payload type.
@@ -282,7 +282,7 @@ The `artifact_depends` is a key-value store, where the value is either a string,
 or an array of strings.
 
 
-### meta-data
+### `meta-data`
 
 Format: JSON
 
@@ -304,7 +304,7 @@ this file:
   number.
 
 
-### scripts
+### `scripts`
 
 Format: Directory containing script files.
 
@@ -349,8 +349,8 @@ For more information about the script and state API, see the official Mender
 documentation.
 
 
-header-augment.tar.gz
--------------
+`header-augment.tar.gz`
+-----------------------
 
 Format: tar
 
@@ -388,8 +388,8 @@ These files and attributes are allowed:
   }
   ```
 
-data
-----
+`data`
+------
 
 Format: Directory containing image files.
 
