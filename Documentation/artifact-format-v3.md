@@ -261,6 +261,9 @@ It can also contain some additional parameters extending or modifying the global
     "artifact_depends": {
         "rootfs_image_checksum": "4d480539cdb23a4aee6330ff80673a5af92b7793eb1c57c4694532f96383b619"
     },
+    "clears_artifact_provides": [
+        "rootfs-image.*"
+    ]
 }
 ```
 
@@ -273,6 +276,15 @@ is a set of parameters specific for a given payload type.
 The `artifact_provides` is a key-value store, where the value is either a string,
 or an array of strings.
 
+By default, when using mender-artifact, for `rootfs-image` payloads, a
+`rootfs-image.version` key is created, and for module images, a
+`rootfs-image.MODULE.version` key is created, where `MODULE` is the payload
+type. This behavior can be, and is expected to be, tweaked by Update Module
+generators. For example it can use a different name than `MODULE` to separate
+`artifact_provides` data for different apps, or it can move the key out of the
+`rootfs-image` namespace and into a different namespace, such as `data-part`, to
+prevent it from being cleared when a new `rootfs-image` update is installed.
+
 #### `artifact_depends`
 
 The `artifact_depends` section in the `type-info` file is a set of parameters
@@ -280,6 +292,31 @@ specific for a given payload type.
 
 The `artifact_depends` is a key-value store, where the value is either a string,
 or an array of strings.
+
+#### `clears_artifact_provides`
+
+This fields instructs clients to erase `artifact_provides` that they already
+have stored which match the glob pattern described in each list entry. This
+should be done prior to storing new fields, in other words, this should never
+clear a field which comes with this Artifact, even if it's in a different
+payload.
+
+The intended use of this field is for full rootfs updates to be able to clear
+fields that have been stored by partial updates, such as a single file
+update. Take a single file update which has stored this `artifact_provide`:
+`rootfs-image.single-file.version = my-file-update-v1`. The `rootfs-image`
+update should define a `clears_artifact_provides` entry, `rootfs-image.*`, which
+will then clear such entries.
+
+When creating an Artifact with mender-artifact, the default is to include one
+entry in the list, which has one of these two values:
+
+* For `rootfs-image` payloads: `rootfs-image.*`
+* For other payloads: `rootfs-image.MODULE.*`, where `MODULE` is the payload
+  type
+
+If the `clears_artifact_provides` field is missing, the default is to clear
+nothing.
 
 
 ### `meta-data`
